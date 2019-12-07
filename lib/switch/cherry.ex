@@ -1,5 +1,5 @@
 defmodule Keyboards.Switch.Cherry do
-  import OpenSCAD
+  use OpenSCAD
 
   ## Square Dimensions of a Cherry MX compatible switch
   @keyswitch_width 14.4
@@ -13,13 +13,13 @@ defmodule Keyboards.Switch.Cherry do
 
 
   def plate(width_u \\ 1, depth_u \\ 1, height_mm \\ 4) do
-    union([ 
+    union([
       mount(height_mm),
       difference([
         ## Solid Plate
-        cube(x: uToMillis(width_u), y: uToMillis(depth_u), z: height_mm, center: true),
-        cube(x: @keyswitch_width+@border*2, y: @keyswitch_depth+@border*2, z: height_mm, center: true)
-      ]) |> translate(z: height_mm/2)
+        cube(size: [uToMillis(width_u), uToMillis(depth_u), height_mm], center: true),
+        cube(size: [@keyswitch_width+@border*2, @keyswitch_depth+@border*2, height_mm], center: true)
+      ]) |> translate(v: [0,0, height_mm/2])
     ])
   end
 
@@ -28,43 +28,43 @@ defmodule Keyboards.Switch.Cherry do
     plate_depth = @keyswitch_depth + @border*2
     plate_height = height_mm
     ## Top Wall
-    top_wall = 
-      cube(x: plate_width, y: @border, z: plate_height, center: true)
-      |> translate(x: 0, y: @y_translate, z: (plate_height/2))
+    top_wall =
+      cube(size: [plate_width, @border, plate_height], center: true)
+      |> translate(v: [0, @y_translate, (plate_height/2)])
 
     ## Bottom Wall
     bottom_wall =
-      cube(x: plate_width, y: @border, z: plate_height, center: true)
-      |> translate(x: 0, y: -@y_translate, z: (plate_height/2))
+      cube(size: [plate_width, @border, plate_height], center: true)
+      |> translate(v: [0, -@y_translate, (plate_height/2)])
 
     ## Right Wall
     right_wall =
-      cube(x: @border, y: plate_depth, z: plate_height, center: true)
-      |> translate(x: @x_translate, y: 0, z: (plate_height/2))
+      cube(size: [@border, plate_depth, plate_height], center: true)
+      |> translate(v: [@x_translate, 0, (plate_height/2)])
 
     right_nub =
       [
-        cube(x: 1.5, y: 2.75, z: plate_height, center: true)
-        |> translate(x: 7.95, y: 0, z: plate_height/2),
-        cylinder('$fn': 30, h: 2.75, r: 1, center: true)
-        |> rotate(x: 90)
-        |> translate(x: 7.2, y: 0, z: 1)
+        cube(size: [1.5, 2.75, plate_height], center: true)
+        |> translate(v: [7.95, 0, plate_height/2]),
+        cylinder(_fn: 30, h: 2.75, r: 1, center: true)
+        |> rotate(a: [90,0,0])
+        |> translate(v: [7.2, 0, 1])
       ] |> hull
-    
+
     ## Left Wall
     left_wall =
-      cube(x: @border, y: plate_depth, z: plate_height, center: true)
-      |> translate(x: -@x_translate, y: 0, z: (plate_height/2))
+      cube(size: [@border, plate_depth, plate_height], center: true)
+      |> translate(v: [-@x_translate, 0, (plate_height/2)])
 
     left_nub =
       [
-        cube(x: 1.5, y: 2.75, z: plate_height, center: true)
-        |> translate(x: -7.95, y: 0, z: plate_height/2),
-        cylinder('$fn': 30, h: 2.75, r: 1, center: true)
-        |> rotate(x: 90)
-        |> translate(x: -7.2, y: 0, z: 1)
+        cube(size: [1.5, 2.75, plate_height], center: true)
+        |> translate(v: [-7.95, 0, plate_height/2]),
+        cylinder(_fn: 30, h: 2.75, r: 1, center: true)
+        |> rotate(a: [90, 0, 0])
+        |> translate(v: [-7.2, 0, 1])
       ] |> hull
-    
+
     [top_wall, bottom_wall, left_wall, left_nub, right_wall, right_nub]
     |> union
 

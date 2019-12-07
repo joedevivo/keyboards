@@ -1,5 +1,5 @@
 defmodule Keyboards.Switch.KailhLP do
-  import OpenSCAD
+  use OpenSCAD
 
   ## Square Dimensions of a Kailh Ultra low profile switch
   @keyswitch_width 13.8
@@ -13,13 +13,13 @@ defmodule Keyboards.Switch.KailhLP do
 
 
   def plate(width_u \\ 1, depth_u \\ 1, height_mm \\ 3) do
-    union([ 
+    union([
       mount(height_mm),
       difference([
         ## Solid Plate
-        cube(x: uToMillis(width_u), y: uToMillis(depth_u), z: height_mm, center: true),
-        cube(x: @keyswitch_width+@border*2, y: @keyswitch_depth+@border*2, z: height_mm, center: true)
-      ]) |> translate(z: height_mm/2)
+        cube(size: [uToMillis(width_u), uToMillis(depth_u), height_mm], center: true),
+        cube(size: [@keyswitch_width+@border*2, @keyswitch_depth+@border*2, height_mm], center: true)
+      ]) |> translate(v: [0,0,height_mm/2])
     ])
   end
 
@@ -28,25 +28,25 @@ defmodule Keyboards.Switch.KailhLP do
     plate_depth = @keyswitch_depth + @border*2
     plate_height = height_mm
     ## Top Wall
-    top_wall = 
-      cube(x: plate_width, y: @border, z: plate_height, center: true)
-      |> translate(x: 0, y: @y_translate, z: (plate_height/2))
+    top_wall =
+      cube(size: [plate_width, @border, plate_height], center: true)
+      |> cube(v: [0, @y_translate, (plate_height/2)])
 
     ## Bottom Wall
     bottom_wall =
-      cube(x: plate_width, y: @border, z: plate_height, center: true)
-      |> translate(x: 0, y: -@y_translate, z: (plate_height/2))
+      cube(size: [plate_width, @border, plate_height], center: true)
+      |> cube(v: [0, -@y_translate, (plate_height/2)])
 
     ## Right Wall
     right_wall =
-      cube(x: @border, y: plate_depth, z: plate_height, center: true)
-      |> translate(x: @x_translate, y: 0, z: (plate_height/2))
-    
+      cube(size: [@border, plate_depth, plate_height], center: true)
+      |> cube(v: [@x_translate, 0, (plate_height/2)])
+
     ## Left Wall
     left_wall =
-      cube(x: @border, y: plate_depth, z: plate_height, center: true)
-      |> translate(x: -@x_translate, y: 0, z: (plate_height/2))
-    
+      cube(size: [@border, plate_depth, plate_height], center: true)
+      |> cube(v: [-@x_translate, 0, (plate_height/2)])
+
     [top_wall, bottom_wall, left_wall, right_wall]
     |> union
 

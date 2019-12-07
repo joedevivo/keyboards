@@ -5,7 +5,7 @@ defmodule Keyboards.MixProject do
     [
       app: :keyboards,
       version: "0.1.0",
-      elixir: "~> 1.6",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -21,7 +21,8 @@ defmodule Keyboards.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:open_scad, path: "../open_scad"}
+      {:open_scad, "~> 0.5.1"},
+      {:math, "~> 0.3.0"}
     ]
   end
 end

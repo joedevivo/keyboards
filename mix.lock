@@ -1,3 +1,5 @@
 %{
-  "file_system": {:hex, :file_system, "0.2.4", "f0bdda195c0e46e987333e986452ec523aed21d784189144f647c43eaf307064", [:mix], [], "hexpm"},
+  "file_system": {:hex, :file_system, "0.2.7", "e6f7f155970975789f26e77b8b8d8ab084c59844d8ecfaf58cbda31c494d14aa", [:mix], [], "hexpm"},
+  "math": {:hex, :math, "0.3.0", "e14e7291115201cb155a3567e66d196bf5088a6f55b030d598107d7ae934a11c", [:mix], [], "hexpm"},
+  "open_scad": {:hex, :open_scad, "0.5.1", "c04c10f1d88272c3593e8a332a582c4ee31a51d7fc1d52a7d3d24079b9c51336", [:mix], [{:file_system, "~> 0.2.7", [hex: :file_system, repo: "hexpm", optional: false]}], "hexpm"},
 }
