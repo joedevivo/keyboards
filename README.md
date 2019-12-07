@@ -65,4 +65,7 @@ The [Dactyl](https://github.com/adereth/dactyl) keyboard is pretty dope, but the
 thumb clusters put strain on my inner thumb over time. This is my WIP port from
 clojure, so I can really wrap my head around it before making changes.
 
-![Dactyl Plate](dactyl.jpg)
+<center>
+![Dactyl Plate](dactyl.png)
+Very WIP
+</center>
