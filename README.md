@@ -66,6 +66,7 @@ thumb clusters put strain on my inner thumb over time. This is my WIP port from
 clojure, so I can really wrap my head around it before making changes.
 
 <center>
+  
 ![Dactyl Plate](dactyl.png)
 Very WIP
 </center>
