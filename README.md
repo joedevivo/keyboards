@@ -1,9 +1,9 @@
 # Keyboards
 
 I like making keyboards, and 3D printing things, and functional programming.
-This is a collection of scripts using my Elixir library, [open_scad]
-(https://github.com/joedevivo/open_scad) to make keyboardy CAD models for
-printing with [OpenSCAD](http://www.openscad.org/)
+This is a collection of scripts using my Elixir library, 
+[open_scad](https://github.com/joedevivo/open_scad) to make keyboardy CAD 
+models for printing with [OpenSCAD](http://www.openscad.org/)
 
 This project is for my own tinkering, but also to serve as an example of the
 `open_scad` library.
